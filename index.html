@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forró Flow | Sequence Generator</title>
+    <meta name="description" content="Gerador inteligente de sequências de Forró Roots e Universitário.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    
+    <main class="container">
+        <header class="header">
+            <h1>Forró Flow</h1>
+            <p>Crie sequências infinitas</p>
+        </header>
+
+        <section class="controls glass-panel">
+            <div class="control-group">
+                <label for="style-select">Estilo</label>
+                <select id="style-select">
+                    <option value="all">Todos Estilos</option>
+                    <option value="Roots">Roots</option>
+                    <option value="Universitário">Universitário</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="step-count">Quantidade</label>
+                <input type="number" id="step-count" value="8" min="2" max="20">
+            </div>
+
+            <div class="control-group">
+                <label for="must-include">Incluir Passo (Opcional)</label>
+                <select id="must-include">
+                    <option value="">Nenhum específico</option>
+                    <!-- Populated by JS -->
+                </select>
+            </div>
+
+            <button id="generate-btn" class="btn-primary">
+                <span class="btn-text">Gerar Sequência</span>
+                <span class="btn-icon">⚡</span>
+            </button>
+        </section>
+
+        <section id="results-area" class="results-area">
+            <!-- Steps will appear here -->
+            <div class="empty-state">
+                <p>Configure e clique em Gerar para começar</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
