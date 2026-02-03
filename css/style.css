@@ -72,8 +72,7 @@ body {
 .controls {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 2rem;
-    align-items: end;
+    gap: 1.5rem;
     padding-bottom: 1rem;
 }
 
@@ -89,11 +88,23 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    align-items: center;
+    /* Center inputs and labels */
+    text-align: center;
+}
+
+.cols-span {
+    grid-column: 1 / -1;
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
 }
 
 .checkbox-group {
     flex-direction: row;
     align-items: center;
+    justify-content: center;
+    /* Center the checkbox content */
     gap: 0.75rem;
     background: rgba(15, 23, 42, 0.6);
     border: 1px solid var(--glass-border);
@@ -136,6 +147,20 @@ input {
     border-radius: 8px;
     font-size: 1rem;
     transition: all 0.2s;
+    width: 100%;
+    /* Ensure full width */
+}
+
+input[type="range"] {
+    cursor: pointer;
+    padding: 0;
+    /* Remove padding for slider track consistency */
+    background: transparent;
+    /* Custom slider style often needs transparent bg */
+    border: none;
+    /* Remove border for cleaner look */
+    height: 2rem;
+    /* Give it some height for touch target */
 }
 
 select:focus,

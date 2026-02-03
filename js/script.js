@@ -15,6 +15,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const styleSelect = document.getElementById('style-select');
     const countInput = document.getElementById('step-count');
     const mustIncludeSelect = document.getElementById('must-include');
+    const maxBasesInput = document.getElementById('max-bases');
+    const maxBasesVal = document.getElementById('max-bases-val');
+
+    // Sync Slider UI
+    function updateSliderMax() {
+        const count = parseInt(countInput.value) || 8;
+        maxBasesInput.max = count;
+        if (parseInt(maxBasesInput.value) > count) {
+            maxBasesInput.value = count;
+            maxBasesVal.textContent = count;
+        }
+    }
+
+    maxBasesInput.addEventListener('input', () => {
+        maxBasesVal.textContent = maxBasesInput.value;
+    });
+
+    countInput.addEventListener('input', updateSliderMax);
+
+    // Initial sync
+    updateSliderMax();
 
     // Initial populate
     populateMustInclude(stepsDB);
@@ -37,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const count = parseInt(countInput.value) || 8;
         const mustIncludeId = mustIncludeSelect.value;
         const avoidBases = document.getElementById('avoid-bases').checked;
+        const maxBases = parseInt(maxBasesInput.value);
 
         // Filter valid steps based on style
         const availableSteps = stepsDB.filter(step => {
@@ -58,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Simplistic retry logic to ensure "Must Include" is present if requested
         while (!success && attempts < MAX_ATTEMPTS) {
             attempts++;
-            sequence = generateSequence(availableSteps, count, avoidBases);
+            sequence = generateSequence(availableSteps, count, avoidBases, maxBases);
 
             if (mustIncludeId) {
                 const hasStep = sequence.some(s => s.id === mustIncludeId);
@@ -77,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderSequence(sequence);
     });
 
-    function generateSequence(pool, length, avoidBases) {
+    function generateSequence(pool, length, avoidBases, maxBases) {
         let seq = [];
 
         // Pick random start step
@@ -96,6 +118,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (avoidBases && currentStep.is_basic) {
                 const nonBasicCandidates = candidates.filter(s => !s.is_basic);
                 // Only filter if we have other options. If we only have bases, we must use them to continue.
+                if (nonBasicCandidates.length > 0) {
+                    candidates = nonBasicCandidates;
+                }
+            }
+
+            // Check Max Bases Limit
+            const currentBases = seq.filter(s => s.is_basic).length;
+            if (currentBases >= maxBases) {
+                const nonBasicCandidates = candidates.filter(s => !s.is_basic);
                 if (nonBasicCandidates.length > 0) {
                     candidates = nonBasicCandidates;
                 }
