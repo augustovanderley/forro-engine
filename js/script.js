@@ -143,6 +143,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
 
+            card.addEventListener('click', () => {
+                const query = encodeURIComponent(`${step.name} passo de forró`);
+                window.open(`https://www.youtube.com/results?search_query=${query}`, '_blank');
+            });
+
             resultsArea.appendChild(card);
             delay++;
         });
