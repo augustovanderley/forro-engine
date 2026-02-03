@@ -25,7 +25,8 @@ forro-engine/
 ├── css/
 │   └── style.css   # Estilos e animações
 ├── js/
-│   └── script.js   # Lógica do gerador e banco de dados de passos
+│   ├── data.js     # Banco de dados de passos (Edite aqui para adicionar passos)
+│   └── script.js   # Lógica do gerador
 └── README.md       # Documentação
 ```
 
@@ -49,8 +50,8 @@ Este projeto está configurado para rodar no **GitHub Pages**.
 ## 🤝 Contribuição
 
 Sinta-se à vontade para adicionar novos passos!
-1. Abra o arquivo `js/script.js`.
-2. Adicione um novo objeto ao array `stepsDB`.
+1. Abra o arquivo `js/data.js`.
+2. Adicione um novo objeto ao array `window.ForroDB`.
 3. Certifique-se de definir corretamente `start_foot` (pé de início) e `end_foot` (pé de fim) para manter a lógica funcionando.
 
 ---
