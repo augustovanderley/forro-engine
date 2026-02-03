@@ -134,6 +134,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (candidates.length === 0) break; // Dead end
 
+            // Prefer Unique Steps (avoid repetitions unless necessary)
+            const uniqueCandidates = candidates.filter(s => !seq.includes(s));
+            if (uniqueCandidates.length > 0) {
+                candidates = uniqueCandidates;
+            }
+
             const nextStep = candidates[Math.floor(Math.random() * candidates.length)];
             seq.push(nextStep);
             currentStep = nextStep;
