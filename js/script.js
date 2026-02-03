@@ -84,14 +84,12 @@ document.addEventListener('DOMContentLoaded', () => {
         seq.push(currentStep);
 
         for (let i = 1; i < length; i++) {
-            // Logic: Previous End Foot Must dictate Next Start Foot.
-            // Rule: weight ends on right -> free foot is left -> next step must start with Left.
-            // So: Next Start Foot != Previous End Foot.
-            // If prev.end_foot is 'R', next.start_foot must be 'L'.
+            // Logic: Previous Final Weight dictates Next Initial Weight.
+            // Rule: Match directly.
 
-            const requiredStartFoot = currentStep.end_foot === 'R' ? 'L' : 'R';
+            const requiredWeight = currentStep.final_weight;
 
-            const candidates = pool.filter(s => s.start_foot === requiredStartFoot);
+            const candidates = pool.filter(s => s.initial_weight === requiredWeight);
 
             if (candidates.length === 0) break; // Dead end
 
@@ -108,6 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Animation delay index
         let delay = 0;
+
+        const mapSide = (side) => side === 'L' ? 'Esq' : 'Dir';
 
         sequence.forEach((step, index) => {
             // Connector (except for first item)
@@ -131,11 +131,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
             card.innerHTML = `
                 <div class="step-info">
-                    <h3>${step.name}</h3>
+                    <div class="step-header">
+                        <h3>${step.name}</h3>
+                        <svg class="youtube-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                            <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                        </svg>
+                    </div>
                     <div class="step-meta">
                         ${tagsHtml}
                         <span>⏱ ${step.beats}t</span>
-                        <span>👣 ${step.start_foot} ➝ ${step.end_foot}</span>
+                        <span>⚖️ Peso: ${mapSide(step.initial_weight)}</span>
                     </div>
                 </div>
                 <div class="step-actions">
