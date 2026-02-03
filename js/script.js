@@ -138,12 +138,21 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span>👣 ${step.start_foot} ➝ ${step.end_foot}</span>
                     </div>
                 </div>
-                <div class="step-indicator">
-                    ${index + 1}
+                <div class="step-actions">
+                    <div class="step-indicator">
+                        ${index + 1}
+                    </div>
+                    <button class="youtube-btn" title="Ver no YouTube">
+                        <svg class="youtube-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                            <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                        </svg>
+                    </button>
                 </div>
             `;
 
-            card.addEventListener('click', () => {
+            const ytBtn = card.querySelector('.youtube-btn');
+            ytBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
                 const query = encodeURIComponent(`${step.name} passo de forró`);
                 window.open(`https://www.youtube.com/results?search_query=${query}`, '_blank');
             });
