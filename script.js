@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             "beats": 4
         },
         {
-            "id": "dobradica",
-            "name": "Dobradiça",
+            "id": "abertura",
+            "name": "Abertura",
             "type": "Universitário",
             "start_foot": "L",
             "end_foot": "R",
