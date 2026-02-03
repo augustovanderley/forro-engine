@@ -8,7 +8,8 @@ window.ForroDB = [
         "type": "Roots",
         "initial_weight": "R",
         "final_weight": "L",
-        "beats": 4
+        "beats": 4,
+        "is_basic": true
     },
     {
         "id": "basic_step_roots_tras",
@@ -16,29 +17,58 @@ window.ForroDB = [
         "type": "Roots",
         "initial_weight": "L",
         "final_weight": "R",
-        "beats": 4
+        "beats": 4,
+        "is_basic": true
     },
     {
-        "id": "basic_step_univ",
-        "name": "Base (Universitário)",
+        "id": "basic_step_univ_frente",
+        "name": "Base para frente (Universitário)",
+        "type": "Universitário",
+        "initial_weight": "R",
+        "final_weight": "L",
+        "beats": 4,
+        "is_basic": true
+    },
+    {
+        "id": "basic_step_univ_tras",
+        "name": "Base para trás (Universitário)",
+        "type": "Universitário",
+        "initial_weight": "L",
+        "final_weight": "R",
+        "beats": 4,
+        "is_basic": true
+    },
+    {
+        "id": "estranho_um_direita",
+        "name": "Estranho 1 - Direita",
+        "type": "Universitário",
+        "initial_weight": "R",
+        "final_weight": "L",
+        "beats": 4,
+        "is_basic": true
+    },
+    {
+        "id": "estranho_um_esquerda",
+        "name": "Estranho 1 - Esquerda",
+        "type": "Universitário",
+        "initial_weight": "L",
+        "final_weight": "R",
+        "beats": 4,
+        "is_basic": true
+    },
+    {
+        "id": "giro_simples_conduzido",
+        "name": "Giro Simples Conduzido",
         "type": "Universitário",
         "initial_weight": "R",
         "final_weight": "L",
         "beats": 4
     },
     {
-        "id": "abertura",
-        "name": "Abertura",
+        "id": "giro_simples_condutor",
+        "name": "Giro Simples Condutor",
         "type": "Universitário",
-        "initial_weight": "R",
-        "final_weight": "L",
-        "beats": 4
-    },
-    {
-        "id": "giro_simples",
-        "name": "Giro Simples",
-        "type": "Universitário",
-        "initial_weight": "R",
+        "initial_weight": "L",
         "final_weight": "R",
         "beats": 4
     },
@@ -65,14 +95,6 @@ window.ForroDB = [
         "initial_weight": "R",
         "final_weight": "L",
         "beats": 2
-    },
-    {
-        "id": "leque",
-        "name": "Leque",
-        "type": "Roots",
-        "initial_weight": "R",
-        "final_weight": "L",
-        "beats": 8
     },
     {
         "id": "facao",

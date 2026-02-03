@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const style = styleSelect.value;
         const count = parseInt(countInput.value) || 8;
         const mustIncludeId = mustIncludeSelect.value;
+        const avoidBases = document.getElementById('avoid-bases').checked;
 
         // Filter valid steps based on style
         const availableSteps = stepsDB.filter(step => {
@@ -57,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Simplistic retry logic to ensure "Must Include" is present if requested
         while (!success && attempts < MAX_ATTEMPTS) {
             attempts++;
-            sequence = generateSequence(availableSteps, count);
+            sequence = generateSequence(availableSteps, count, avoidBases);
 
             if (mustIncludeId) {
                 const hasStep = sequence.some(s => s.id === mustIncludeId);
@@ -76,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderSequence(sequence);
     });
 
-    function generateSequence(pool, length) {
+    function generateSequence(pool, length, avoidBases) {
         let seq = [];
 
         // Pick random start step
@@ -89,7 +90,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const requiredWeight = currentStep.final_weight;
 
-            const candidates = pool.filter(s => s.initial_weight === requiredWeight);
+            let candidates = pool.filter(s => s.initial_weight === requiredWeight);
+
+            // Filter out bases if requested and current step is also a base
+            if (avoidBases && currentStep.is_basic) {
+                const nonBasicCandidates = candidates.filter(s => !s.is_basic);
+                // Only filter if we have other options. If we only have bases, we must use them to continue.
+                if (nonBasicCandidates.length > 0) {
+                    candidates = nonBasicCandidates;
+                }
+            }
 
             if (candidates.length === 0) break; // Dead end
 
